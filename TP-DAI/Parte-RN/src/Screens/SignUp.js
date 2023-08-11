@@ -1,16 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react'
-import { Animated, TouchableOpacity, TextInput, StyleSheet, Text, View } from 'react-native';
+import * as react from 'react'
 
-import {
-    useFonts,
-    Fredoka_300Light,
-} from "@expo-google-fonts/fredoka";
-import Input from '../Components/Input';
-import Button from "../Components/Button"
-TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
-
-export default function LoginScreen() {
+export default function SignUp() {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
     const [respuesta, setRespuesta] = useState()
@@ -25,7 +15,7 @@ export default function LoginScreen() {
                 <View>
                     <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
                     <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
-                    
+
                     <View style={styles.containerButon}>
                         <Button texto="Enviar" usuario={usuario} contraseña={contraseña} setRespuesta={setRespuesta}></Button>
                         <Text>{respuesta}</Text>
@@ -38,7 +28,6 @@ export default function LoginScreen() {
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
