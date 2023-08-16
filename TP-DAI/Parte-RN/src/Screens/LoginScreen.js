@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react'
 import { Animated, TouchableOpacity, TextInput, StyleSheet, Text, View } from 'react-native';
-
+import axios from 'axios'
 import {
     useFonts,
     Fredoka_300Light,
@@ -13,11 +13,30 @@ TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 export default function LoginScreen() {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
-    const [respuesta, setRespuesta] = useState()
+    const [Usuarios, setUsuarios] = useState('')
+    const [validation, setValidation] = React.useState();
+    const [isLoading, setLoading] = React.useState(true)
+    const [respuesta, setRespuesta] = React.useState('')
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
 
+    const onPress = () => {
+        setValidation(false);
+        axios.get('http://localhost:5000/login')
+            .then(function (response) {
+                UsuariosArr = response.data
+                verificar(UsuariosArr)
+            })
+            .finally(() => setLoading(false))
+    }
+    const verificar = usuariosArr => {
+        usuariosArr.forEach(element => {
+            if (element.Nombre === usuario && element.contraseña === contraseña) {
+                setValidation(true)
+            }
+        });
+    }
 
     return (
         <View style={styles.container}>
@@ -25,10 +44,9 @@ export default function LoginScreen() {
                 <View>
                     <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
                     <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
-                    
                     <View style={styles.containerButon}>
-                        <Button texto="Enviar" usuario={usuario} contraseña={contraseña} setRespuesta={setRespuesta}></Button>
-                        <Text>{respuesta}</Text>
+                        <Button texto="Enviar" usuario={usuario} onPress={onPress}contraseña={contraseña} ></Button>
+                        {isLoading ? null : !validation ? <Text>{}</Text>}
                         <Text>No tienes cuenta. Registrate!</Text>
                     </View>
                     <StatusBar style="auto" />

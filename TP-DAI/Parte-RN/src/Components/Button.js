@@ -2,14 +2,7 @@ import * as react from 'react'
 import { StyleSheet, View, Animated, Text, TouchableOpacity } from "react-native"
 import axios from 'axios'
 export default function Button(props) {
-    const onPress = () => {
-        axios.post('http://localhost:5000/login', {
-            Usuario: props.usuario,
-            Contraseña: props.contraseña
-        })
-            .then((response) => props.setRespuesta(response.data.message))
-    }
-
+    
     const animation = new Animated.Value(0);
     const inputRange = [0, 1];
     const outputRange = [1, 0.8];
