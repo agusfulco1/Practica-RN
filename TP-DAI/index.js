@@ -1,6 +1,6 @@
 import express from "express"
 import cors from "cors";
-import { UsersServices } from "./services/usersServices.js";
+import { UsersServices } from "./src/services/usersServices.js";
 const app = express();
 const port = 5000;
 app.use(cors());
@@ -12,12 +12,18 @@ const elLogger = (req, res, next) => {
     next()
 }
 app.get('/login', async(req,res) => {
-    
+    try {
+        const Usuarios = await UsersServices.getAll()
+        res.status(200).send(Usuarios)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Error' })
+    }
 })
 app.post('/login',async (req, res) => {
     try {
-        await usersServices.insert(req.body)
-        res.status(200).json({ message: 'Cuenta OK' })
+        await UsersServices.insert(req.body)
+        res.status(500).json({message: 'Cuenta Creada' })
     } catch (error) {
         console.error(error);
         res.status(500).json({error: 'Error' })

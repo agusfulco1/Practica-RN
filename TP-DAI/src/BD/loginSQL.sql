@@ -1,0 +1,14 @@
+USE [master]
+GO
+CREATE LOGIN [Castigada] WITH PASSWORD=N'Seras', DEFAULT_DATABASE=[BDPractica], CHECK_EXPIRATION=OFF,
+CHECK_POLICY=OFF
+GO
+
+USE [BDPractica]
+GO
+CREATE USER [Castigada] FOR LOGIN [Castigada]
+GO
+USE [BDPractica]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [Castigada]
+GO
