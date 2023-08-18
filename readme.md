@@ -1,7 +1,7 @@
 ## BackEnd
 
 0. Copiar y pegar el archivo BD en sql server
-1. Copiar esto
+1. Copiar esto__
 USE [master]
 GO
 CREATE LOGIN [Castigada] WITH PASSWORD=N'Seras', DEFAULT_DATABASE=[BDPractica], CHECK_EXPIRATION=OFF,
