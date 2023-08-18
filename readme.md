@@ -4,6 +4,6 @@
 
 ## FrontEnd
 
-0- Ubicarse en Parte-RN
-1- npm i
-2- expo start
+0. Ubicarse en Parte-RN 
+1. npm i
+2. expo start
