@@ -19,6 +19,6 @@ export class UsersServices {
         let result = await pool.request()
                             .input('pUsuario', Usuario.Nombre)
                             .input('pContraseña', Usuario.Contraseña)
-                            .query('INSERT (Nombre, Contraseña) ON (@pUsuario, @pContraseña)')
+                            .query('INSERT INTO USuario (Nombre, Contraseña) VALUES (@pUsuario, @pContraseña)')
     }
 }

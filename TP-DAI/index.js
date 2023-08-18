@@ -20,10 +20,33 @@ app.get('/login', async(req,res) => {
         res.status(500).json({error: 'Error' })
     }
 })
-app.post('/login',async (req, res) => {
+app.post('/login', async (req,res) => {
     try {
-        await UsersServices.insert(req.body)
-        res.status(500).json({message: 'Cuenta Creada' })
+        const Usuarios = await UsersServices.getAll()
+        const usuario = Usuarios.find((element) => element.Nombre == req.body.Nombre && element.Contraseña == req.body.Contraseña)
+        console.log(usuario)
+        if (usuario == undefined) {
+            res.status(200).json({message: 'El usuario o la contraseña no coinciden'})
+        }
+        else {
+            res.status(200).json({message: 'Cuenta OK'})
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Error' })
+    }
+})
+app.post('/registrarse',async (req, res) => {
+    try {
+        const Usuarios = await UsersServices.getAll()
+        const usuario = Usuarios.find((element => element.Nombre == req.body.Nombre));
+        if (usuario == undefined) {
+            await UsersServices.insert(req.body)
+            res.status(200).json({message: 'Cuenta Creada' })
+        }
+        else {
+            res.status(200).json({message: 'El usuario ya existe' })
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({error: 'Error' })
