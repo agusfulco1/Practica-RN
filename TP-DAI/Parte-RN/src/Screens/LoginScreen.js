@@ -13,19 +13,16 @@ TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 export default function LoginScreen() {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
-    const [Usuarios, setUsuarios] = useState('')
-    const [validation, setValidation] = React.useState();
-    const [isLoading, setLoading] = React.useState(true)
-    const [respuesta, setRespuesta] = React.useState('')
+    const [isLoading, setLoading] = useState(true)
+    const [respuesta, setRespuesta] = useState('')
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
 
     const onPress = () => {
-        setValidation(false);
         axios.get('http://localhost:5000/login')
             .then(function (response) {
-                UsuariosArr = response.data
+                const UsuariosArr = response.data
                 verificar(UsuariosArr)
             })
             .finally(() => setLoading(false))
@@ -33,9 +30,12 @@ export default function LoginScreen() {
     const verificar = usuariosArr => {
         usuariosArr.forEach(element => {
             if (element.Nombre === usuario && element.contraseña === contraseña) {
-                setValidation(true)
+                setRespuesta('Cuenta OK')
             }
         });
+        if (respuesta == ""){
+            setRespuesta("La contraseña o nombre de usuario no coinciden")
+        }
     }
 
     return (
@@ -45,9 +45,9 @@ export default function LoginScreen() {
                     <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
                     <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
                     <View style={styles.containerButon}>
-                        <Button texto="Enviar" usuario={usuario} onPress={onPress}contraseña={contraseña} ></Button>
-                        {isLoading ? null : !validation ? <Text>{}</Text>}
-                        <Text>No tienes cuenta. Registrate!</Text>
+                        <Button texto="Enviar" usuario={usuario} onPress={onPress} contraseña={contraseña} ></Button>
+                        {isLoading ? null : respuesta }
+                        <TouchableOpacity style={styles.textSignUp}>No tienes cuenta? Registrate!</TouchableOpacity>
                     </View>
                     <StatusBar style="auto" />
                 </View>
@@ -101,5 +101,8 @@ const styles = StyleSheet.create({
     },
     containerButon: {
         textAlign: 'center'
+    },
+    textSignUp: {
+        color: 'blue'
     }
 });

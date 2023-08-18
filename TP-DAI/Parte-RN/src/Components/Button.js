@@ -22,7 +22,7 @@ export default function Button(props) {
     };
     return (
         <Animated.View style={[styles.button, { transform: [{ scale }] }]}>
-            <TouchableOpacity onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut} style={styles.botonContainer}>
+            <TouchableOpacity onPress={props.onPress} onPressIn={onPressIn} onPressOut={onPressOut} style={styles.botonContainer}>
                 <Text style={styles.textoBoton}>{props.texto}</Text>
             </TouchableOpacity>
         </Animated.View>

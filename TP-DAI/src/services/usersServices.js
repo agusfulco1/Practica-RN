@@ -6,7 +6,7 @@ export class UsersServices {
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                                .query('SELECT Nombre, Contraseña FROM Usuarios')
+                                .query('SELECT Nombre, Contraseña FROM Usuario')
             return result.recordsets[0];
         }
         catch (error) {
