@@ -15,7 +15,7 @@ GO
 USE [BDPractica]
 GO
 ALTER ROLE [db_owner] ADD MEMBER [Castigada]
-GO
+GO  
 2. npm i
 3. npm start
 ## FrontEnd
