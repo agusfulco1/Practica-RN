@@ -16,7 +16,8 @@ USE [BDPractica]
 GO
 ALTER ROLE [db_owner] ADD MEMBER [Castigada]
 GO
-2. 
+2. npm i
+3. npm start
 ## FrontEnd
 
 0. Ubicarse en Parte-RN 
