@@ -15,9 +15,10 @@
     GO
     ALTER ROLE [db_owner] ADD MEMBER [Castigada]
     GO
-2. Poner el mismo nombre de la computadora en el .env
-3. npm i 
-4. npm start
+
+3. Poner el mismo nombre de la computadora en el .env
+4. npm i 
+5. npm start
 ## FrontEnd
 
 0. Ubicarse en Parte-RN 
