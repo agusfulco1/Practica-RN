@@ -52,7 +52,17 @@ app.post('/registrarse',async (req, res) => {
         res.status(500).json({error: 'Error' })
     }
 })
-
+app.post('/usuario',async (req,res) => {
+    try {
+        const Usuarios = await UsersServices.getAll()
+        const usuario = Usuarios.find((element) => element.Nombre == req.body.Nombre && element.Contraseña == req.body.Contraseña)
+        res.status(200).send(usuario)
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Error' })
+    }
+})
 app.listen(port, () => {
     console.log(`Escuchando puerto: ${port}`)
 })

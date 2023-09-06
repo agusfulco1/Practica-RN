@@ -12,6 +12,7 @@ import axios from 'axios'
 export default function SignUp() {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
+    const [nombreCompleto, setNombreCompleto] = useState('')
     const [respuesta, setRespuesta] = useState()
     const [isLoading, setLoading] = useState(true)
     let [fontsLoaded] = useFonts({
@@ -23,7 +24,8 @@ export default function SignUp() {
     const onPress = () => {
         axios.post('http://localhost:5000/registrarse', {
             Nombre: usuario,
-            Contraseña: contraseña
+            Contraseña: contraseña,
+            NombreCompleto: nombreCompleto
         })
         .then(function (response) {
             setRespuesta(response.data.message)
@@ -37,6 +39,7 @@ export default function SignUp() {
                 <View>
                     <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
                     <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
+                    <Input label="Nombre Completo" value={nombreCompleto} onChange={setNombreCompleto}></Input>
                     <View style={styles.containerButon}>
                         <Button texto="Enviar" usuario={usuario} onPress={onPress} contraseña={contraseña} ></Button>
                         {isLoading ? null : <Text>{respuesta}</Text>}

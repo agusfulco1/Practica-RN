@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react'
-import { Animated, TouchableOpacity, TextInput, StyleSheet, Text, View } from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import axios from 'axios'
 import {
     useFonts,
@@ -24,14 +23,18 @@ export default function LoginScreen(props) {
     const onPress = () => {
         axios.post('http://localhost:5000/login', {
             Nombre: usuario,
-            Contraseña: contraseña
+            Contraseña: contraseña,
         })
             .then(function (response) {
                 setRespuesta(response.data.message)
+                if (response.data.message === "Cuenta OK") {
+                    props.navigation.navigate('Home', {Usuario: usuario, Contraseña: contraseña})
+                }
             })
             .finally(function () { 
                 setLoading(false)
             })
+        
     }
 
     return (
@@ -40,6 +43,7 @@ export default function LoginScreen(props) {
                 <View>
                     <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
                     <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
+                    
                     <View style={styles.containerButon}>
                         <Button texto="Enviar" usuario={usuario} onPress={onPress} contraseña={contraseña} ></Button>
                         {isLoading ? null : <Text>{respuesta}</Text> }
