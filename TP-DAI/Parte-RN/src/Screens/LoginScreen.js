@@ -10,7 +10,7 @@ import Button from "../Components/Button"
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 export default function LoginScreen(props) {
-    const [usuario, setUsuario] = useState('')
+    const [nombre, setNombre] = useState('')
     const [contraseña, setContraseña] = useState('')
     const [isLoading, setLoading] = useState(true)
     const [respuesta, setRespuesta] = useState('')
@@ -22,13 +22,13 @@ export default function LoginScreen(props) {
     }
     const onPress = () => {
         axios.post('http://localhost:5000/login', {
-            Nombre: usuario,
+            Nombre: nombre,
             Contraseña: contraseña,
         })
             .then(function (response) {
                 setRespuesta(response.data.message)
                 if (response.data.message === "Cuenta OK") {
-                    props.navigation.navigate('Home', {Usuario: usuario, Contraseña: contraseña})
+                    props.navigation.navigate('Home', {Usuario: nombre, Contraseña: contraseña})
                 }
             })
             .finally(function () { 
@@ -41,11 +41,11 @@ export default function LoginScreen(props) {
         <View style={styles.container}>
             {!fontsLoaded ? null : (
                 <View>
-                    <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
+                    <Input label="Usuario" value={nombre} onChange={setNombre}></Input>
                     <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
                     
                     <View style={styles.containerButon}>
-                        <Button texto="Enviar" usuario={usuario} onPress={onPress} contraseña={contraseña} ></Button>
+                        <Button texto="Enviar" nombre={nombre} onPress={onPress} contraseña={contraseña} ></Button>
                         {isLoading ? null : <Text>{respuesta}</Text> }
                         <TouchableOpacity onPress={onPressSign}><Text style={styles.textSignUp}>No tienes cuenta? Registrate!</Text></TouchableOpacity>
                     </View>
