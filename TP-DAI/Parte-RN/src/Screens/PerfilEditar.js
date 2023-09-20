@@ -15,7 +15,8 @@ export default function PerfilEditar({route}) {
     const [respuesta, setRespuesta] = useState()
     const [isLoading, setLoading] = useState(true)
 
-    const {ObjUsuario} = route.params
+    const {ObjetoUsuario} = useContext(UserContext)
+
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
@@ -23,7 +24,7 @@ export default function PerfilEditar({route}) {
     const onPress = () => {
         if (usuario !== "" && contraseña !== "") {
             axios.put('http://localhost:5000/usuario', {
-                Usuario: ObjUsuario
+                Usuario: ObjetoUsuario.usuario
             })
             .then(function(response) {
                 setRespuesta(response.data.message)

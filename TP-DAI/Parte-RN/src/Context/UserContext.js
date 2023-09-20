@@ -1,2 +1,2 @@
-
-export const UserContext = {Usuario: null, Contraseña: null}
+import { createContext } from "react"
+export const UserContext = createContext()

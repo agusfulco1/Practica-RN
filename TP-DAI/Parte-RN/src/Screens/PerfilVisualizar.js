@@ -1,25 +1,21 @@
 import { Animated, TouchableOpacity, TextInput, StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
     useFonts,
     Fredoka_300Light,
 } from "@expo-google-fonts/fredoka";
 import Button from "../Components/Button"
+import { UserContext } from '../Context/UserContext';
+export default function Perfil({navigation}) {
 
-export default function Perfil({navigation, route}) {
-    const [usuario, setUsuario] = useState('')
-    const [contraseña, setContraseña] = useState('')
-    const [nombreCompleto, setNombreCompleto] = useState('')
-    const [respuesta, setRespuesta] = useState()
-    const [isLoading, setLoading] = useState(true)
+    const {ObjetoUsuario} = useContext(UserContext)
 
-    const { ObjUsuario } = route.params
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
 
     const CambiarModo = () => {{
-        navigation.navigate("PerfilEditar", {ObjUsuario: ObjUsuario})
+        navigation.navigate("PerfilEditar")
     }}
     return (
         <View style={styles.container}>
