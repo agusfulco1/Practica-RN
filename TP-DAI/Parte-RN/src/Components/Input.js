@@ -9,7 +9,7 @@ export default function Input(props) {
             <TextInput
                 style={styles.input}
                 onChangeText={props.onChange}
-                value={props.value} 
+                value={props.value}  
             />
         </View>
     )

@@ -6,10 +6,12 @@ import {
 } from "@expo-google-fonts/fredoka";
 import Button from "../Components/Button"
 import { UserContext } from '../Context/UserContext';
+
 export default function Perfil({navigation}) {
 
-    const {ObjetoUsuario} = useContext(UserContext)
+    const ObjUsuario = useContext(UserContext)
 
+    console.log(ObjUsuario)
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
@@ -23,9 +25,9 @@ export default function Perfil({navigation}) {
                 <>
                     <Button texto="Editar" onPress={CambiarModo}></Button>
                     <View style={styles.container2}>
-                        <Text>{ObjUsuario.Nombre}</Text>
-                        <Text>{ObjUsuario.Contraseña}</Text>
-                        <Text>{ObjUsuario.NombreCompleto}</Text>
+                        <Text>{ObjUsuario.user.Nombre}</Text>
+                        <Text>{ObjUsuario.user.Contraseña}</Text>
+                        <Text>{ObjUsuario.user.Email}</Text>
                     </View>
                 </>
             )}

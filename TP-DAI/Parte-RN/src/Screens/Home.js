@@ -5,8 +5,11 @@ import { UserContext } from '../Context/UserContext'
 export default function Home({route, navigation}) {
     const [usuario, setUsuario] = useState('')
     const [isLoading, setIsLoading] = useState(true)
+
     const { Usuario, Contraseña } = route.params
-    const { ObjetoCarrito } = useContext(UserContext)
+
+    const ObjetoUser  = useContext(UserContext)
+
     useEffect(() => {
         axios.post('http://localhost:5000/usuario', {
             Nombre: Usuario,
@@ -20,9 +23,10 @@ export default function Home({route, navigation}) {
     }, [])
     
     const onPress = () => {
-        ObjetoCarrito.setUsuario(usuario)
+        ObjetoUser.setUser(usuario)
         navigation.navigate('PerfilVisualizar')
     }
+    
     return (
         <View>
             {isLoading ? null : usuario.NombreCompleto === null ? <Text>Bienvenido <TouchableOpacity style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></TouchableOpacity></Text> : <Text>Bienvenido {usuario.Nombre} <TouchableOpacity style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></TouchableOpacity></Text>}

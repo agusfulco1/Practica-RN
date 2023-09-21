@@ -1,22 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Input from '../Components/Input';
 import Button from "../Components/Button"
-import {useState} from 'react'
+import {useState, useContext, useEffect} from 'react'
 import {
     useFonts,
     Fredoka_300Light,
 } from "@expo-google-fonts/fredoka";
 import axios from 'axios'
-
+import { UserContext } from '../Context/UserContext';
 export default function PerfilEditar({route}) {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
-    const [nombreCompleto, setNombreCompleto] = useState('')
+    const [email, setEmail] = useState('')
     const [respuesta, setRespuesta] = useState()
     const [isLoading, setLoading] = useState(true)
 
-    const {ObjetoUsuario} = useContext(UserContext)
+    const ObjetoUsuario = useContext(UserContext)
 
+    useEffect(() => {
+        setUsuario(ObjetoUsuario.user.Nombre)
+        setContraseña(ObjetoUsuario.user.Contraseña)
+        setEmail(ObjetoUsuario.user.Email)
+    }, [])
+    
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
@@ -24,7 +30,7 @@ export default function PerfilEditar({route}) {
     const onPress = () => {
         if (usuario !== "" && contraseña !== "") {
             axios.put('http://localhost:5000/usuario', {
-                Usuario: ObjetoUsuario.usuario
+                Usuario: ObjetoUsuario.user
             })
             .then(function(response) {
                 setRespuesta(response.data.message)
@@ -39,7 +45,7 @@ export default function PerfilEditar({route}) {
     }
 
     const CambiarModo = () => {{
-        navigation.navigate("PerfilVisualizar", {ObjUsuario: ObjUsuario})
+        navigation.navigate("PerfilVisualizar")
     }}
 
     return (
@@ -50,7 +56,7 @@ export default function PerfilEditar({route}) {
                     <View style={styles.container2}>
                         <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
                         <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
-                        <Input label="Nombre Completo" value={nombreCompleto} onChange={setNombreCompleto}></Input>
+                        <Input label="Nombre Completo" value={email} onChange={setEmail}></Input>
                         <View style={styles.containerButon}>
                             <Button texto="Guardar Cambios" usuario={usuario} onPress={onPress} contraseña={contraseña} ></Button>
                             {isLoading ? null : <Text>{respuesta}</Text>}
