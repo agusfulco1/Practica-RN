@@ -63,6 +63,21 @@ app.post('/usuario',async (req,res) => {
         res.status(500).json({error: 'Error' })
     }
 })
+app.put('/usuario', async (req,res) => {
+    try {
+        const usuario = req.body
+        if (usuario.Nombre !== "" && usuario.Contraseña !== "") {
+            await UserServices.update(req.body)
+            res.status(200).json({message: 'Cambios guardados'})
+        } else {
+            res.status(200).json({message: 'No se pudieron guardar los cambios, recuerda que los campos con asterisco son obligatorios'})
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({error: 'Fallo el update'})
+    }
+})
 app.listen(port, () => {
     console.log(`Escuchando puerto: ${port}`)
 })

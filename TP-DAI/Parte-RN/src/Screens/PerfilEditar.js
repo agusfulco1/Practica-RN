@@ -8,7 +8,7 @@ import {
 } from "@expo-google-fonts/fredoka";
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext';
-export default function PerfilEditar({route}) {
+export default function PerfilEditar() {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
     const [email, setEmail] = useState('')
@@ -44,15 +44,10 @@ export default function PerfilEditar({route}) {
         } 
     }
 
-    const CambiarModo = () => {{
-        navigation.navigate("PerfilVisualizar")
-    }}
-
     return (
         <View style={styles.container}>
             {!fontsLoaded ? null : (
                 <>
-                    <Button texto="Visualizar" onPress={CambiarModo}></Button>
                     <View style={styles.container2}>
                         <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
                         <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>

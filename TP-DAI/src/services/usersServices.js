@@ -19,7 +19,16 @@ export class UsersServices {
         let result = await pool.request()
                             .input('pUsuario', Usuario.Nombre)
                             .input('pContraseña', Usuario.Contraseña)
-                            .input('pNombreCompleto', Usuario.NombreCompleto)
-                            .query('INSERT INTO USuario (Nombre, Contraseña, NombreCompleto) VALUES (@pUsuario, @pContraseña @pNombreCompleto)')
+                            .input('pEmail', Usuario.NombreCompleto)
+                            .query('INSERT INTO USuario (Nombre, Contraseña, NombreCompleto) VALUES (@pUsuario, @pContraseña @pEmail)')
+    }
+    static update = async(Usuario) => {
+        let pool = await sql.connect(config)
+        let result = await pool.request()
+                            .input('pId', Usuario.id)
+                            .input('pUsuario', Usuario.Nombre)
+                            .input('pContraseña', Usuario.Contraseña)
+                            .input('pEmail', Usuario.NombreCompleto)
+                            .query('UPDATE Usuario SET Nombre=@pUsuario, Contraseña=@pContraseña, ')
     }
 }
