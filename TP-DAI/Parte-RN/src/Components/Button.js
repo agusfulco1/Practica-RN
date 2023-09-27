@@ -34,14 +34,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#1573FF",
         borderRadius: 50,
         padding: 10,
-        marginTop: 40,
+        marginTop: 15,
         outlineColor: "#1573FF",
         outlineStyle: "solid",
         outlineWidth: 2,
         outlineOffset: 3,
         width: 300,
         justifyContent: "center",
-        height: 60
+        height: 60,
+        marginBottom: 15,
     },
     textoBoton: {
         fontSize: 20,

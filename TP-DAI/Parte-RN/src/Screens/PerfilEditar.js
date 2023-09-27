@@ -28,9 +28,15 @@ export default function PerfilEditar() {
     });
 
     const onPress = () => {
+        const objUsuario = {
+            Nombre: usuario,
+            Contraseña: contraseña,
+            Email: email
+        }
+        ObjetoUsuario = objUsuario
         if (usuario !== "" && contraseña !== "") {
             axios.put('http://localhost:5000/usuario', {
-                Usuario: ObjetoUsuario.user
+                Usuario: objUsuario
             })
             .then(function(response) {
                 setRespuesta(response.data.message)

@@ -1,7 +1,7 @@
 import { config } from "../../dbconfig.js"
 import  sql from "mssql"
 
-export class UsersServices {
+export class UserServices {
     static getAll = async() => {
         try {
             let pool = await sql.connect(config);
@@ -19,8 +19,8 @@ export class UsersServices {
         let result = await pool.request()
                             .input('pUsuario', Usuario.Nombre)
                             .input('pContraseña', Usuario.Contraseña)
-                            .input('pEmail', Usuario.NombreCompleto)
-                            .query('INSERT INTO USuario (Nombre, Contraseña, NombreCompleto) VALUES (@pUsuario, @pContraseña @pEmail)')
+                            .input('pEmail', Usuario.Email)
+                            .query('INSERT INTO Usuario (Nombre, Contraseña, Email) VALUES (@pUsuario, @pContraseña, @pEmail)')
     }
     static update = async(Usuario) => {
         let pool = await sql.connect(config)
@@ -28,7 +28,7 @@ export class UsersServices {
                             .input('pId', Usuario.id)
                             .input('pUsuario', Usuario.Nombre)
                             .input('pContraseña', Usuario.Contraseña)
-                            .input('pEmail', Usuario.NombreCompleto)
-                            .query('UPDATE Usuario SET Nombre=@pUsuario, Contraseña=@pContraseña, ')
+                            .input('pEmail', Usuario.Email)
+                            .query('UPDATE Usuario SET Nombre=@pUsuario, Contraseña=@pContraseña, Email=@pEmail WHERE id = @pId')
     }
 }

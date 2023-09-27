@@ -1,6 +1,6 @@
 import express from "express"
 import cors from "cors";
-import { UsersServices } from "./src/services/usersServices.js";
+import { UserServices } from "./src/services/usersServices.js";
 const app = express();
 const port = 5000;
 app.use(cors());
@@ -13,7 +13,7 @@ const elLogger = (req, res, next) => {
 }
 app.get('/login', async(req,res) => {
     try {
-        const Usuarios = await UsersServices.getAll()
+        const Usuarios = await UserServices.getAll()
         res.status(200).send(Usuarios)
     } catch (error) {
         console.error(error);
@@ -22,7 +22,7 @@ app.get('/login', async(req,res) => {
 })
 app.post('/login', async (req,res) => {
     try {
-        const Usuarios = await UsersServices.getAll()
+        const Usuarios = await UserServices.getAll()
         const usuario = Usuarios.find((element) => element.Nombre == req.body.Nombre && element.Contraseña == req.body.Contraseña)
         console.log(usuario)
         if (usuario == undefined) {
@@ -38,10 +38,10 @@ app.post('/login', async (req,res) => {
 })
 app.post('/registrarse',async (req, res) => {
     try {
-        const Usuarios = await UsersServices.getAll()
+        const Usuarios = await UserServices.getAll()
         const usuario = Usuarios.find((element => element.Nombre == req.body.Nombre));
         if (usuario == undefined) {
-            await UsersServices.insert(req.body)
+            await UserServices.insert(req.body)
             res.status(200).json({message: 'Cuenta Creada' })
         }
         else {
@@ -54,7 +54,7 @@ app.post('/registrarse',async (req, res) => {
 })
 app.post('/usuario',async (req,res) => {
     try {
-        const Usuarios = await UsersServices.getAll()
+        const Usuarios = await UserServices.getAll()
         const usuario = Usuarios.find((element) => element.Nombre == req.body.Nombre && element.Contraseña == req.body.Contraseña)
         res.status(200).send(usuario)
     }
@@ -66,6 +66,7 @@ app.post('/usuario',async (req,res) => {
 app.put('/usuario', async (req,res) => {
     try {
         const usuario = req.body
+        console.log(usuario)
         if (usuario.Nombre !== "" && usuario.Contraseña !== "") {
             await UserServices.update(req.body)
             res.status(200).json({message: 'Cambios guardados'})
