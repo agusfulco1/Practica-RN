@@ -8,13 +8,13 @@ import {
 } from "@expo-google-fonts/fredoka";
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext';
-export default function PerfilEditar() {
+export default function PerfilEditar({navigation}) {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
     const [email, setEmail] = useState('')
     const [respuesta, setRespuesta] = useState()
     const [isLoading, setLoading] = useState(true)
-
+    
     const ObjetoUsuario = useContext(UserContext)
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function PerfilEditar() {
             Contraseña: contraseña,
             Email: email
         }
-        ObjetoUsuario = objUsuario
+        ObjetoUsuario.setUser(objUsuario)
         if (usuario !== "" && contraseña !== "") {
             axios.put('http://localhost:5000/usuario', {
                 Usuario: objUsuario

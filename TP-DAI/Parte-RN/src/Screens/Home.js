@@ -23,7 +23,9 @@ export default function Home({route, navigation}) {
     }, [])
     
     const onPress = () => {
-        ObjetoUser.setUser(usuario)
+        if (ObjetoUser.user == null) {
+            ObjetoUser.setUser(usuario)
+        }
         navigation.navigate('PerfilVisualizar')
     }
     

@@ -23,11 +23,23 @@ export default function Perfil({navigation}) {
         <View style={styles.container}>
             {!fontsLoaded ? null : (
                 <>
-                    <Button texto="Editar" onPress={CambiarModo}></Button>
-                    <View style={styles.container2}>
-                        <Text>{ObjUsuario.user.Nombre}</Text>
-                        <Text>{ObjUsuario.user.Contraseña}</Text>
-                        <Text>{ObjUsuario.user.Email}</Text>
+                <View style={styles.container2}>
+                    <View style={styles.titulo}>
+                        <Text style={styles.textoTitulo}>Tu perfil</Text>
+                        <Button texto="Editar" onPress={CambiarModo}></Button>
+                    </View>
+                    <View style={styles.containerDatos}>
+                        <View style={styles.containerDato}>
+                            <Text style={styles.dato}>Usuario: {ObjUsuario.user.Nombre}</Text>
+                        </View>
+                        <View style={styles.containerDato}>
+                            <Text style={styles.dato}>Contraseña: {ObjUsuario.user.Contraseña}</Text>
+                        </View>
+                        <View style={styles.containerDato}> 
+                            <Text style={styles.dato}>Email: {ObjUsuario.user.Email}</Text>
+                        </View>
+                    </View>
+                    
                     </View>
                 </>
             )}
@@ -43,45 +55,39 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    input: {
-        height: 40,
+    container2: {
+        height: "50%",
+        width: '42%',
         borderWidth: 1,
-        padding: 10,
-        outLineStyle: 'none',
-        marginBottom: 10
+        borderColor: 'blue'
     },
-    label: {
-        color: "#00000080",
-        fontSize: 15,
-        fontWeight: 300,
+    titulo: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: 'space-around',
+        backgroundColor: "blue",
+        height: "20%",
+        width: "100%",
+        alignItems: "center"
     },
-    box: {
-        alignItems: 'left',
+    textoTitulo: {
+        color: "white",
+        fontSize: 35,
+        fontWeight: 600,
     },
-    botonContainer: {
-        backgroundColor: "#1573FF",
-        borderRadius: 50,
-        padding: 10,
-        marginTop: 20,
-        outlineColor: "#1573FF",
-        outlineStyle: "solid",
-        outlineWidth: 2,
-        outlineOffset: 3,
-        width: 200,
-        height: 40,
+    containerDatos: {
+        alignItems: 'center',
+        height: "80%",
     },
-    textoBoton: {
-        fontSize: 14,
-        color: "#fff",
-        fontWeight: "bold",
-        alignSelf: "center",
-        fontFamily: "Fredoka_300Light",
-        justifyContent: "center"
+    dato: {
+        fontSize: 25
     },
-    containerButon: {
-        alignItems: 'center'
-    },
-    textSignUp: {
-        color: 'blue'
+    containerDato: {
+        justifyContent: 'center',
+        width: "100%",
+        alignItems: 'center',
+        height: "33.333333333333333333333%",
+        borderBottomColor: 'lightgray',
+        borderWidth: 1,
     }
 });
