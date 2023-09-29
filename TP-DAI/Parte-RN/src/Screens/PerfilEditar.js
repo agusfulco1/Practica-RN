@@ -46,6 +46,7 @@ export default function PerfilEditar({navigation}) {
             })
         }
         else {
+            setLoading(false)
             setRespuesta("Cambios no guardados, los campos con asterisco son obligatorios")
         } 
     }
