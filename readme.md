@@ -129,7 +129,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages
+3. Install NPM packages in `TP-DAI` and `Parte-RN`
    ```sh
    npm install
    ```
@@ -138,9 +138,6 @@ _Below is an example of how you can instruct your audience on installing and set
    DB_SERVER = "Computer Name"
    ```
 5. Copy the two files in the folder called `src/BD`
-   ```js
-   DB_SERVER = "Computer Name"
-   ```
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
