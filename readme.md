@@ -154,7 +154,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 Queremos agradecer a las siguientes fuentes:
 
-* [Google Fonts]([https://choosealicense.com](https://fonts.google.com/))
+* [Google Fonts](https://fonts.google.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
