@@ -125,7 +125,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Uso
 
 Vamos a mostrarle las pantallas las cuales se va a encontrar en nuestra aplicacion:
 
@@ -136,7 +136,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Mapa de uso
 
 - [x] Loguearme y registrarme
 - [x] Mostrar la home
@@ -150,7 +150,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## Agradecimientos
 
 Queremos agradecer a las siguientes fuentes:
 
