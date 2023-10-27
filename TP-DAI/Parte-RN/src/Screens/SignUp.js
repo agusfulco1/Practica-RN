@@ -7,8 +7,8 @@ import {
 } from "@expo-google-fonts/fredoka";
 import Input from '../Components/Input';
 import Button from "../Components/Button"
-import axios from 'axios'
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc, getFirestore } from "firebase/firestore"; 
 export default function SignUp({navigation}) {
     const [usuario, setUsuario] = useState('')
     const [contraseña, setContraseña] = useState('')
@@ -22,15 +22,7 @@ export default function SignUp({navigation}) {
         navigation.navigate('Login')
     }
     const onPress = () => {
-        axios.post('http://localhost:5000/registrarse', {
-            Nombre: usuario,
-            Contraseña: contraseña,
-            Email: email
-        })
-        .then(function (response) {
-            setRespuesta(response.data.message)
-        })
-        .finally(() => setLoading(false))
+        
     } 
 
     return (

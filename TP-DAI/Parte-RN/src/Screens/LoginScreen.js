@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import axios from 'axios'
 import {
     useFonts,
@@ -7,11 +7,12 @@ import {
 } from "@expo-google-fonts/fredoka";
 import Input from '../Components/Input';
 import Button from "../Components/Button"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 export default function LoginScreen(props) {
-    const [nombre, setNombre] = useState('')
-    const [contraseña, setContraseña] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [isLoading, setLoading] = useState(true)
     const [respuesta, setRespuesta] = useState('')
     let [fontsLoaded] = useFonts({
@@ -20,33 +21,40 @@ export default function LoginScreen(props) {
     const onPressSign = () => {
         props.navigation.navigate('Sign Up')
     }
-    const onPress = () => {
-        axios.post('http://localhost:5000/login', {
-            Nombre: nombre,
-            Contraseña: contraseña,
-        })
-            .then(function (response) {
-                setRespuesta(response.data.message)
-                if (response.data.message === "Cuenta OK") {
-                    props.navigation.navigate('Home', {Usuario: nombre, Contraseña: contraseña})
-                }
-            })
-            .finally(function () { 
-                setLoading(false)
-            })
-        
+    const onPress = async () => {
+        try {
+            const auth = getAuth();
+            const { user } = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            console.log(user)
+            if (user.email !== undefined) {
+                props.navigation.navigate('Home', {Email: email, Password: password})
+            }
+        }
+        catch(error) {
+            console.log(error);
+            Toast.show({
+                type: "error",
+                text1: "Error",
+                text2: "El email o password no coinciden",
+            });
+        }
+
     }
 
     return (
         <View style={styles.container}>
             {!fontsLoaded ? null : (
                 <View>
-                    <Input label="Usuario" value={nombre} onChange={setNombre}></Input>
-                    <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
-                    
+                    <Input label="Email" value={email} onChange={setEmail}></Input>
+                    <Input label="Contraseña" value={password} onChange={setPassword}></Input>
+
                     <View style={styles.containerButon}>
-                        <Button texto="Enviar" nombre={nombre} onPress={onPress} contraseña={contraseña} ></Button>
-                        {isLoading ? null : <Text>{respuesta}</Text> }
+                        <Button texto="Enviar" email={email} onPress={onPress} password={password} ></Button>
+                        {isLoading ? null : <Text>{respuesta}</Text>}
                         <TouchableOpacity onPress={onPressSign}><Text style={styles.textSignUp}>No tienes cuenta? Registrate!</Text></TouchableOpacity>
                     </View>
                 </View>

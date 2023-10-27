@@ -1,8 +1,8 @@
 import StackScreen from "./src/Navigation/Stack"
 import { NavigationContainer } from '@react-navigation/native';
 import { initializeApp } from "firebase/app";
-import firebase from "firebase/compat/app";
 import "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -17,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
-
+const auth = getAuth(app);
 export default function App() {
   return (
     <NavigationContainer>

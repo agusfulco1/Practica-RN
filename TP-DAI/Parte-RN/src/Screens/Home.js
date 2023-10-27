@@ -6,7 +6,7 @@ export default function Home({route, navigation}) {
     const [usuario, setUsuario] = useState('')
     const [isLoading, setIsLoading] = useState(true)
 
-    const { Usuario, Contraseña } = route.params
+    const { Email, Password } = route.params
 
     const ObjetoUser  = useContext(UserContext)
 
