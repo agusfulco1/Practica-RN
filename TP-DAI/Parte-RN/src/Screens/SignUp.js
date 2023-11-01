@@ -14,7 +14,7 @@ export default function SignUp({ navigation }) {
     const [password, setPassword] = useState('')
     const [respuesta, setRespuesta] = useState()
     const [isLoading, setLoading] = useState()
-    const [user, setUser] = useState("")
+    const [usuario, setUser] = useState("")
     const [apellido, setApellido] = useState("")
     const [nombre, setNombre] = useState("")
 
@@ -38,14 +38,15 @@ export default function SignUp({ navigation }) {
                 console.log(nombre)
                 console.log(email)
                 console.log(apellido)
-                console.log(user)
+                console.log(usuario)
                 console.log(password)
                 await setDoc(doc(db, "users", uid), {
                     nombre,
                     apellido,
                     email,
-                    user,
+                    usuario,
                     password,
+                    uid,
                 });
                 setNombre("");
                 setApellido("");
@@ -53,18 +54,9 @@ export default function SignUp({ navigation }) {
                 setPassword("");
                 setUser("");
                 setLoading(false)
-                Toast.show({
-                    type: "success",
-                    text1: "Registro exitoso",
-                    text2: "El email ha sido creado correctamente.",
-                });
+
             } catch (error) {
                 console.log(error);
-                Toast.show({
-                    type: "error",
-                    text1: "Error",
-                    text2: "Ha ocurrido un error al crear el email.",
-                });
             }
     }
 
@@ -76,7 +68,7 @@ export default function SignUp({ navigation }) {
                     <Input label="Contraseña" value={password} onChange={setPassword}></Input>
                     <Input label="Nombre" value={nombre} onChange={setNombre}></Input>
                     <Input label="Apellido" value={apellido} onChange={setApellido}></Input>
-                    <Input label="Usuario" value={user} onChange={setUser}></Input>
+                    <Input label="Usuario" value={usuario} onChange={setUser}></Input>
                     <View style={styles.containerButon}>
                         <Button texto="Enviar" onPress={onPress} ></Button>
                         {isLoading ? null : <Text>{respuesta}</Text>}
