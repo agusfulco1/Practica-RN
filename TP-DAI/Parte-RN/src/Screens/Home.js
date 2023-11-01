@@ -11,15 +11,7 @@ export default function Home({route, navigation}) {
     const ObjetoUser  = useContext(UserContext)
 
     useEffect(() => {
-        axios.post('http://localhost:5000/usuario', {
-            Nombre: Usuario,
-            Contraseña: Contraseña
-        })
-            .then(function(response) {
-                console.log(response.data)
-                setUsuario(response.data)
-            })
-            .finally(() => setIsLoading(false))
+        
     }, [])
     
     const onPress = () => {

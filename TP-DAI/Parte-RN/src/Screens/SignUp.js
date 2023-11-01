@@ -8,32 +8,77 @@ import {
 import Input from '../Components/Input';
 import Button from "../Components/Button"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc, getFirestore } from "firebase/firestore"; 
-export default function SignUp({navigation}) {
-    const [usuario, setUsuario] = useState('')
-    const [contraseña, setContraseña] = useState('')
+import { doc, setDoc, getFirestore } from "firebase/firestore";
+export default function SignUp({ navigation }) {
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [respuesta, setRespuesta] = useState()
-    const [isLoading, setLoading] = useState(true)
+    const [isLoading, setLoading] = useState()
+    const [user, setUser] = useState("")
+    const [apellido, setApellido] = useState("")
+    const [nombre, setNombre] = useState("")
+
+
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
     const onPressSign = () => {
         navigation.navigate('Login')
     }
-    const onPress = () => {
-        
-    } 
+    const onPress = async () => {
+            try {
+                const auth = getAuth();
+                const { user } = await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+                const { uid } = user;
+                const db = getFirestore();
+                console.log(nombre)
+                console.log(email)
+                console.log(apellido)
+                console.log(user)
+                console.log(password)
+                await setDoc(doc(db, "users", uid), {
+                    nombre,
+                    apellido,
+                    email,
+                    user,
+                    password,
+                });
+                setNombre("");
+                setApellido("");
+                setEmail("");
+                setPassword("");
+                setUser("");
+                setLoading(false)
+                Toast.show({
+                    type: "success",
+                    text1: "Registro exitoso",
+                    text2: "El email ha sido creado correctamente.",
+                });
+            } catch (error) {
+                console.log(error);
+                Toast.show({
+                    type: "error",
+                    text1: "Error",
+                    text2: "Ha ocurrido un error al crear el email.",
+                });
+            }
+    }
 
     return (
         <View style={styles.container}>
             {!fontsLoaded ? null : (
                 <View>
-                    <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
-                    <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
                     <Input label="Email" value={email} onChange={setEmail}></Input>
+                    <Input label="Contraseña" value={password} onChange={setPassword}></Input>
+                    <Input label="Nombre" value={nombre} onChange={setNombre}></Input>
+                    <Input label="Apellido" value={apellido} onChange={setApellido}></Input>
+                    <Input label="Usuario" value={user} onChange={setUser}></Input>
                     <View style={styles.containerButon}>
-                        <Button texto="Enviar" usuario={usuario} onPress={onPress} contraseña={contraseña} ></Button>
+                        <Button texto="Enviar" onPress={onPress} ></Button>
                         {isLoading ? null : <Text>{respuesta}</Text>}
                         <TouchableOpacity onPress={onPressSign} ><Text style={styles.textSignUp}>Ya tiene Cuenta? Logueate!</Text></TouchableOpacity>
                     </View>
