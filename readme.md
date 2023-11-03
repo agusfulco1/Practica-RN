@@ -33,15 +33,6 @@
 
   <p align="center">
     Login con vista a perfil
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explorar la documentacion »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">Ir a demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Reportar un error</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Pedir una nueva caracteristica</a>
   </p>
 </div>
 
@@ -54,19 +45,19 @@
     <li>
       <a href="#sobre-el-proyecto">Sobre el proyecto</a>
       <ul>
-        <li><a href="#built-with">Programado con</a></li>
+        <li><a href="#programado-con">Programado con</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Comenzando</a>
+      <a href="#comenzando">Comenzando</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisitos</a></li>
-        <li><a href="#installation">Instalacion</a></li>
+        <li><a href="#prerequisitos">Prerequisitos</a></li>
+        <li><a href="#instalacion">Instalacion</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Uso</a></li>
-    <li><a href="#roadmap">Mapa de uso</a></li>
-    <li><a href="#acknowledgments">Agradecimientos</a></li>
+    <li><a href="#uso">Uso</a></li>
+    <li><a href="#mapa-de-uso">Mapa de uso</a></li>
+    <li><a href="#agradecimientos">Agradecimientos</a></li>
   </ol>
 </details>
 
@@ -85,8 +76,10 @@ Esta es una aplicacion la cual cuenta con un login y un sign up, y tambien cuent
 
 Estas son algunas de las librerias y frameworks que utilizamos:
 
-*![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-* [![JQuery][JQuery.com]][JQuery-url]
+* ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+* ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
+* ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+* ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -97,27 +90,27 @@ Estas son algunas de las librerias y frameworks que utilizamos:
 
 En este espacio le vamos a guiar para que pueda usar nuestra aplicacion sin complicaciones.
 
-### Prerequisites
+### Prerequisitos
 
 Necesitas instalar npm tanto en la parte de frontend en la carpeta `Parte-RN` y `TP-DAI`
 * npm
   ```sh
   npm install npm@latest -g
   ```
+  
 
-### Installation
+### Instalacion
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+Aca les vamos a mostrar como instalar nuestro proyecto
 
 1. Clona el repositorio
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/agusfulco1/Practica-RN.git
    ```
-2. Pon el nombre de tu computadora en `.env`
+2. ubicate en la carpeta `ParteRN` y pon en la terminal
    ```js
-   DB_SERVER = "Nombre de la computadora"
+   npm i
    ```
-3. Copia los 2 archivos dentro de la carpeta `src/BD` en la base de datos mssql server
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -192,27 +185,6 @@ Queremos agradecer a las siguientes fuentes:
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
 
-## BackEnd
-
-0. Copiar y pegar el archivo BD en sql server
-1. USE [master]
-    GO
-    CREATE LOGIN [Castigada] WITH PASSWORD=N'Seras', DEFAULT_DATABASE=[BDPractica], CHECK_EXPIRATION=OFF,
-    CHECK_POLICY=OFF
-    GO
-    
-    USE [BDPractica]
-    GO
-    CREATE USER [Castigada] FOR LOGIN [Castigada]
-    GO
-    USE [BDPractica]
-    GO
-    ALTER ROLE [db_owner] ADD MEMBER [Castigada]
-    GO
-
-3. Poner el mismo nombre de la computadora en el .env
-4. npm i 
-5. npm start
 ## FrontEnd
 
 0. Ubicarse en Parte-RN 
