@@ -85,7 +85,7 @@ Esta es una aplicacion la cual cuenta con un login y un sign up, y tambien cuent
 
 Estas son algunas de las librerias y frameworks que utilizamos:
 
-* [React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+*![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 * [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
