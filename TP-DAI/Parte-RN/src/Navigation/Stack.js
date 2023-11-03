@@ -9,9 +9,8 @@ import { useState } from 'react';
 const Stack = createNativeStackNavigator();
 export default function StackScreen() {
     const [user, setUser] = useState()
-    const objetoUsuario = {user: user, setUser: setUser}
     return (
-        <UserContext.Provider value={objetoUsuario}>
+        <UserContext.Provider value={{user, setUser}}>
             <Stack.Navigator>
                 <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
                 <Stack.Screen name="Sign Up" component={SignUp}></Stack.Screen>

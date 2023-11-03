@@ -8,42 +8,49 @@ import {
 } from "@expo-google-fonts/fredoka";
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext';
+import { doc, setDoc, getFirestore } from "firebase/firestore";
 export default function PerfilEditar({navigation}) {
-    const [usuario, setUsuario] = useState('')
-    const [contraseña, setContraseña] = useState('')
-    const [email, setEmail] = useState('')
+    const [Usuario, setUsuario] = useState('')
+    const [Contraseña, setContraseña] = useState('')
+    const [Email, setEmail] = useState('')
     const [respuesta, setRespuesta] = useState()
     const [isLoading, setLoading] = useState(true)
+    const [Nombre, setNombre] = useState("")
+    const[Apellido, setApellido] = useState("")
     
     const ObjetoUsuario = useContext(UserContext)
 
     useEffect(() => {
-        setUsuario(ObjetoUsuario.user.Nombre)
-        setContraseña(ObjetoUsuario.user.Contraseña)
-        setEmail(ObjetoUsuario.user.Email)
+        setUsuario(ObjetoUsuario.user.usuario)
+        setContraseña(ObjetoUsuario.user.contraseña)
+        setEmail(ObjetoUsuario.user.email)
+        setNombre(ObjetoUsuario.user.nombre)
+        setApellido(ObjetoUsuario.user.apellido)
     }, [])
     
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
 
-    const onPress = () => {
+    const onPress = async () => {
+        const uid = ObjetoUsuario.user.uid
         const objUsuario = {
-            Nombre: usuario,
-            Contraseña: contraseña,
-            Email: email
+            Nombre: Nombre,
+            Contraseña: Contraseña,
+            Email: Email,
+            Usuario: Usuario,
+            Apellido: Apellido,
+            uid
         }
         ObjetoUsuario.setUser(objUsuario)
-        if (usuario !== "" && contraseña !== "") {
-            axios.put('http://localhost:5000/usuario', {
-                Usuario: objUsuario
-            })
-            .then(function(response) {
-                setRespuesta(response.data.message)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
+        if (Email !== "" && Contraseña !== "") {
+            const db = getFirestore();
+                await setDoc(doc(db, "users", uid), {
+                    objUsuario
+                });
+                console.log(objUsuario)
+                ObjetoUsuario.setUser(objUsuario)
+                navigation.navigate("PerfilVisualizar")
         }
         else {
             setLoading(false)
@@ -56,11 +63,13 @@ export default function PerfilEditar({navigation}) {
             {!fontsLoaded ? null : (
                 <>
                     <View style={styles.container2}>
-                        <Input label="Usuario" value={usuario} onChange={setUsuario}></Input>
-                        <Input label="Contraseña" value={contraseña} onChange={setContraseña}></Input>
-                        <Input label="Nombre Completo" value={email} onChange={setEmail}></Input>
+                        <Input label="Usuario" value={Usuario} onChange={setUsuario}></Input>
+                        <Input label="Contraseña" value={Contraseña} onChange={setContraseña}></Input>
+                        <Input label="Email" value={Email} onChange={setEmail}></Input>
+                        <Input label="Nombre" value={Nombre} onChange={setNombre}></Input>
+                        <Input label="Apellido" value={Apellido} onChange={setApellido}></Input>
                         <View style={styles.containerButon}>
-                            <Button texto="Guardar Cambios" usuario={usuario} onPress={onPress} contraseña={contraseña} ></Button>
+                            <Button texto="Guardar Cambios" onPress={onPress} ></Button>
                             {isLoading ? null : <Text>{respuesta}</Text>}
                         </View>
                     </View>

@@ -1,4 +1,4 @@
-import { Animated, TouchableOpacity, TextInput, StyleSheet, Text, View } from 'react-native';
+import { Animated, TextInput, StyleSheet, Text, View } from 'react-native';
 import { useContext, useState } from 'react'
 import {
     useFonts,
@@ -30,13 +30,19 @@ export default function Perfil({navigation}) {
                     </View>
                     <View style={styles.containerDatos}>
                         <View style={styles.containerDato}>
-                            <Text style={styles.dato}>Usuario: {ObjUsuario.user.Nombre}</Text>
+                            <Text style={styles.dato}>Usuario: {ObjUsuario.user.nombre}</Text>
                         </View>
                         <View style={styles.containerDato}>
-                            <Text style={styles.dato}>Contraseña: {ObjUsuario.user.Contraseña}</Text>
+                            <Text style={styles.dato}>Contraseña: {ObjUsuario.user.contraseña}</Text>
                         </View>
                         <View style={styles.containerDato}> 
-                            <Text style={styles.dato}>Email: {ObjUsuario.user.Email}</Text>
+                            <Text style={styles.dato}>Email: {ObjUsuario.user.email}</Text>
+                        </View>
+                        <View style={styles.containerDato}> 
+                            <Text style={styles.dato}>Apellido: {ObjUsuario.user.apellido}</Text>
+                        </View>
+                        <View style={styles.containerDato}> 
+                            <Text style={styles.dato}>Usuario: {ObjUsuario.user.usuario}</Text>
                         </View>
                     </View>
                     

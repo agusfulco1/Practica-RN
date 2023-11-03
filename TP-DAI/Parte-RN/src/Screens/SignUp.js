@@ -1,5 +1,5 @@
 import * as react from 'react'
-import { Animated, TouchableOpacity, TextInput, StyleSheet, Text, View } from 'react-native';
+import { Animated, Pressable, TextInput, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react'
 import {
     useFonts,
@@ -35,11 +35,6 @@ export default function SignUp({ navigation }) {
                 );
                 const { uid } = user;
                 const db = getFirestore();
-                console.log(nombre)
-                console.log(email)
-                console.log(apellido)
-                console.log(usuario)
-                console.log(password)
                 await setDoc(doc(db, "users", uid), {
                     nombre,
                     apellido,
@@ -54,6 +49,7 @@ export default function SignUp({ navigation }) {
                 setPassword("");
                 setUser("");
                 setLoading(false)
+                navigation.navigate('Login')
 
             } catch (error) {
                 console.log(error);
@@ -72,7 +68,7 @@ export default function SignUp({ navigation }) {
                     <View style={styles.containerButon}>
                         <Button texto="Enviar" onPress={onPress} ></Button>
                         {isLoading ? null : <Text>{respuesta}</Text>}
-                        <TouchableOpacity onPress={onPressSign} ><Text style={styles.textSignUp}>Ya tiene Cuenta? Logueate!</Text></TouchableOpacity>
+                        <Pressable onPress={onPressSign} ><Text style={styles.textSignUp}>Ya tiene Cuenta? Logueate!</Text></Pressable>
                     </View>
                 </View>
             )}

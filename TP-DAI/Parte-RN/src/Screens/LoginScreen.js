@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { useContext, useEffect, useState } from 'react'
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import axios from 'axios'
 import {
     useFonts,
@@ -8,7 +8,9 @@ import {
 import Input from '../Components/Input';
 import Button from "../Components/Button"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
+import { UserContext } from '../Context/UserContext'
+import { doc, getDoc, getFirestore, collection } from "firebase/firestore";
+Pressable.defaultProps = { activeOpacity: 0.8 };
 
 export default function LoginScreen(props) {
     const [email, setEmail] = useState('')
@@ -18,6 +20,7 @@ export default function LoginScreen(props) {
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
+    const objetoUser = useContext(UserContext)
     const onPressSign = () => {
         props.navigation.navigate('Sign Up')
     }
@@ -29,22 +32,19 @@ export default function LoginScreen(props) {
                 email,
                 password
             );
-            console.log(user)
+            const db = getFirestore();
+            const docRef = doc(collection(db, 'users'), user.uid);
+            const docSnap = await getDoc(docRef);
             if (user.email !== undefined) {
-                props.navigation.navigate('Home', {Email: email, Password: password})
+                objetoUser.setUser(docSnap.data())
+                props.navigation.navigate('Home')
             }
         }
         catch(error) {
             console.log(error);
-            Toast.show({
-                type: "error",
-                text1: "Error",
-                text2: "El email o password no coinciden",
-            });
         }
 
     }
-
     return (
         <View style={styles.container}>
             {!fontsLoaded ? null : (
@@ -55,7 +55,7 @@ export default function LoginScreen(props) {
                     <View style={styles.containerButon}>
                         <Button texto="Enviar" email={email} onPress={onPress} password={password} ></Button>
                         {isLoading ? null : <Text>{respuesta}</Text>}
-                        <TouchableOpacity onPress={onPressSign}><Text style={styles.textSignUp}>No tienes cuenta? Registrate!</Text></TouchableOpacity>
+                        <Pressable onPress={onPressSign}><Text style={styles.textSignUp}>No tienes cuenta? Registrate!</Text></Pressable>
                     </View>
                 </View>
             )}

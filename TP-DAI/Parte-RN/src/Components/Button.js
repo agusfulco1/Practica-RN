@@ -1,5 +1,5 @@
 import * as react from 'react'
-import { StyleSheet, View, Animated, Text, TouchableOpacity } from "react-native"
+import { StyleSheet, View, Animated, Text, Pressable } from "react-native"
 import axios from 'axios'
 export default function Button(props) {
     
@@ -22,9 +22,9 @@ export default function Button(props) {
     };
     return (
         <Animated.View style={[styles.button, { transform: [{ scale }] }]}>
-            <TouchableOpacity onPress={props.onPress} onPressIn={onPressIn} onPressOut={onPressOut} style={styles.botonContainer}>
+            <Pressable onPress={props.onPress} onPressIn={onPressIn} onPressOut={onPressOut} style={styles.botonContainer}>
                 <Text style={styles.textoBoton}>{props.texto}</Text>
-            </TouchableOpacity>
+            </Pressable>
         </Animated.View>
     )
 }

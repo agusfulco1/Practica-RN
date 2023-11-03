@@ -1,27 +1,21 @@
 import { useContext, useEffect, useState} from 'react'
-import {View, StyleSheet ,Text, Button, TouchableOpacity} from 'react-native'
+import {View, StyleSheet ,Text, Button, Pressable} from 'react-native'
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext'
 export default function Home({route, navigation}) {
     const [usuario, setUsuario] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
-
-    const { Email, Password } = route.params
 
     const ObjetoUser  = useContext(UserContext)
 
-    useEffect(() => {
-        
-    }, [])
     
     const onPress = () => {
-        ObjetoUser.setUser(usuario)
+
         navigation.navigate('PerfilVisualizar')
     }
     
     return (
         <View>
-            {isLoading ? null : usuario.NombreCompleto === null ? <Text>Bienvenido <TouchableOpacity style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></TouchableOpacity></Text> : <Text>Bienvenido {usuario.Nombre} <TouchableOpacity style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></TouchableOpacity></Text>}
+            {ObjetoUser.user.nombre === null ? <Text>Bienvenido <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text> : <Text>Bienvenido {ObjetoUser.user.nombre} <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text>}
         </View>
     )
 }
