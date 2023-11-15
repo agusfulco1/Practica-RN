@@ -30,19 +30,19 @@ export default function Perfil({navigation}) {
                     </View>
                     <View style={styles.containerDatos}>
                         <View style={styles.containerDato}>
-                            <Text style={styles.dato}>Usuario: {ObjUsuario.user.nombre}</Text>
+                            <Text style={styles.dato}>Nombre: {ObjUsuario.user.Nombre}</Text>
                         </View>
                         <View style={styles.containerDato}>
-                            <Text style={styles.dato}>Contraseña: {ObjUsuario.user.contraseña}</Text>
+                            <Text style={styles.dato}>Contraseña: {ObjUsuario.user.Contraseña}</Text>
                         </View>
                         <View style={styles.containerDato}> 
-                            <Text style={styles.dato}>Email: {ObjUsuario.user.email}</Text>
+                            <Text style={styles.dato}>Email: {ObjUsuario.user.Email}</Text>
                         </View>
                         <View style={styles.containerDato}> 
-                            <Text style={styles.dato}>Apellido: {ObjUsuario.user.apellido}</Text>
+                            <Text style={styles.dato}>Apellido: {ObjUsuario.user.Apellido}</Text>
                         </View>
                         <View style={styles.containerDato}> 
-                            <Text style={styles.dato}>Usuario: {ObjUsuario.user.usuario}</Text>
+                            <Text style={styles.dato}>Usuario: {ObjUsuario.user.Usuario}</Text>
                         </View>
                     </View>
                     

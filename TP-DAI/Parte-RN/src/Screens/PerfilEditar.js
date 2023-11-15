@@ -21,11 +21,11 @@ export default function PerfilEditar({navigation}) {
     const ObjetoUsuario = useContext(UserContext)
 
     useEffect(() => {
-        setUsuario(ObjetoUsuario.user.usuario)
-        setContraseña(ObjetoUsuario.user.contraseña)
-        setEmail(ObjetoUsuario.user.email)
-        setNombre(ObjetoUsuario.user.nombre)
-        setApellido(ObjetoUsuario.user.apellido)
+        setUsuario(ObjetoUsuario.user.Usuario)
+        setContraseña(ObjetoUsuario.user.Contraseña)
+        setEmail(ObjetoUsuario.user.Email)
+        setNombre(ObjetoUsuario.user.Nombre)
+        setApellido(ObjetoUsuario.user.Apellido)
     }, [])
     
     let [fontsLoaded] = useFonts({
@@ -42,7 +42,6 @@ export default function PerfilEditar({navigation}) {
             Apellido: Apellido,
             uid
         }
-        ObjetoUsuario.setUser(objUsuario)
         if (Email !== "" && Contraseña !== "") {
             const db = getFirestore();
                 await setDoc(doc(db, "users", uid), {

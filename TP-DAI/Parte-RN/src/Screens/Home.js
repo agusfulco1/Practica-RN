@@ -7,6 +7,7 @@ export default function Home({route, navigation}) {
 
     const ObjetoUser  = useContext(UserContext)
 
+    console.log(ObjetoUser)
     
     const onPress = () => {
 
@@ -15,7 +16,7 @@ export default function Home({route, navigation}) {
     
     return (
         <View>
-            {ObjetoUser.user.nombre === null ? <Text>Bienvenido <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text> : <Text>Bienvenido {ObjetoUser.user.nombre} <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text>}
+            {ObjetoUser.user.nombre === null ? <Text>Bienvenido <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text> : <Text>Bienvenido {ObjetoUser.user.Nombre} <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text>}
         </View>
     )
 }
