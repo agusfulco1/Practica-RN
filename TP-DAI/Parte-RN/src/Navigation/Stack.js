@@ -15,8 +15,6 @@ export default function StackScreen() {
                 <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
                 <Stack.Screen name="Sign Up" component={SignUp}></Stack.Screen>
                 <Stack.Screen name="Home" component={Home}></Stack.Screen>
-                <Stack.Screen name="PerfilVisualizar" component={PerfilVisualizar}></Stack.Screen>
-                <Stack.Screen name="PerfilEditar" component={PerfilEditar}></Stack.Screen>
             </Stack.Navigator>
         </UserContext.Provider>
             
