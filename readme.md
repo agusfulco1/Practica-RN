@@ -29,10 +29,10 @@
     <img src="images/image.png" alt="Logo" width="150" height=auto>
   </a>
 
-  <h3 align="center">Practica-RN</h3>
+  <h3 align="center">Reventa para todos</h3>
 
   <p align="center">
-    Login con vista a perfil
+    Tu sitio de confianza para comprar entradas por reventa legalmente.
   </p>
 </div>
 
