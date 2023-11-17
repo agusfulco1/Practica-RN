@@ -32,7 +32,7 @@
   <h3 align="center">Reventa para todos</h3>
 
   <p align="center">
-    Tu sitio de confianza para comprar entradas por reventa legalmente.
+    ¡Las entradas que buscás, las encontrás acá!.
   </p>
 </div>
 
