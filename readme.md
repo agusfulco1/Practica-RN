@@ -122,8 +122,7 @@ Aca les vamos a mostrar como instalar nuestro proyecto
 
 Vamos a mostrarle las pantallas las cuales se va a encontrar en nuestra aplicacion:
 
-![Home](images/Home.png) width=80 height=80
-<img src="images/Home.png"width=100% height=auto>
+![Home](images/Home.png)
 ![Login](images/Login.png)
 ![PerfilEditar](images/PerfilEditar.png)
 ![PerfilVisualizar](images/PerfilVisualizar.png)
