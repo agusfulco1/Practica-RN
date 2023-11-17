@@ -26,14 +26,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/image.png" alt="Logo" width="150" height=auto>
+    <img src="images/logo.png" alt="Logo" width="350" height=auto>
   </a>
-
-  <h3 align="center">Reventa para todos</h3>
-
-  <p align="center">
-    ¡Las entradas que buscás, las encontrás acá!.
-  </p>
 </div>
 
 
