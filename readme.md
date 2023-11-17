@@ -122,12 +122,13 @@ Aca les vamos a mostrar como instalar nuestro proyecto
 
 Vamos a mostrarle las pantallas las cuales se va a encontrar en nuestra aplicacion:
 
-![Home](images/Home.png)
+<img src="images/Login.png" width=100%>
+<img src="images/Register.png" width=100%>
 <img src="images/Home.png" width=100%>
-![Login](images/Login.png)
-![PerfilEditar](images/PerfilEditar.png)
-![PerfilVisualizar](images/PerfilVisualizar.png)
-![Register](images/Register.png)
+<img src="images/PerfilVisualizar.png" width=100%>
+<img src="images/PerfilEditar.png" width=100%>
+
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
