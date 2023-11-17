@@ -37,7 +37,7 @@ export default function LoginScreen(props) {
             const docSnap = await getDoc(docRef);
             if (user.email !== undefined) {
                 objetoUser.setUser(docSnap.data().objUsuario)
-                props.navigation.navigate('Home')
+                props.navigation.navigate('Tab')
             }
         }
         catch(error) {

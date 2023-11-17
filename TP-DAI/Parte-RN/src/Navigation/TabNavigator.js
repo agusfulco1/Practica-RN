@@ -1,13 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Itinerario from "../Screens/Itinerario"
-import Bot from "../Screens/Bot";
+import Home from '../Screens/Home'
+import PerfilStack from './PerfilStack'
 import { UserContext } from '../Context/UserContext'
-import Login from '../Screens/Login'
 import { useEffect, useState, useContext } from "react";
-import LogOut from "./LogOut";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Catalogo from "../Screens/Catalogo";
 const Tab = createBottomTabNavigator()
 
 const homeName = "Home";
@@ -36,12 +32,9 @@ export default function TabNavigator({ route }) {
                         if (rn === homeName) {
                             iconName = focused ? 'home' : 'home-outline';
 
-                        } else if (rn === chatName) {
-                            iconName = focused ? 'chatbox' : 'chatbox-outline';
-
-                        } else if (rn === logOut) {
+                        }  else if (rn === perfilName) {
                             iconName = focused ? 'person-circle' : 'person-circle-outline'
-                        } else if (rn === catalogoName) {
+                        } else if (rn === logOut) {
                             iconName = focused ? 'basket' : 'basket-outline'
                         }
                         // You can return any component that you like here!
@@ -55,8 +48,8 @@ export default function TabNavigator({ route }) {
                     labelStyle: { paddingBottom: 10, fontSize: 10 },
                     style: { padding: 10, height: 70 }
                 }}>
-                <Tab.Screen name={homeName} component={Home} />
-                <Tab.Screen name={perfilName} component={PerfilStack} />
+                <Tab.Screen name={homeName} component={Home}/>
+                <Tab.Screen name={perfilName} component={PerfilStack}/>
                 {/*<Tab.Screen name={logOut} component={LogOut}></Tab.Screen>*/}
             </Tab.Navigator>
         
