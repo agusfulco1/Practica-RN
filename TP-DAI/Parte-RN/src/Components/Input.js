@@ -1,9 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { StyleSheet, View, Text, TextInput, Animated, Pressable } from "react-native"
 
 export default function Input(props) {
     const animation = new Animated.Value(0);
-
+    /*const bgInput = animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['white', 'blue']
+    })
     const onPressIn = () => {
         console.log("hola")
         Animated.spring(animation, {
@@ -18,25 +21,22 @@ export default function Input(props) {
         }).start();
     };
 
-    const bgInput = animation.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['white', 'blue']
-    })
-    console.log(bgInput)
+    useEffect(() => {
+        console.log(bgInput)
+    }, [animation])*/
+    
+    
 
     return (
         <Animated.View style={styles.box}>
-            <Pressable onPressIn={onPressIn} onPressOut={onPressOut}>
+            {/*<Pressable /*onPressIn={onPressIn} onPressOut={onPressOut} </Pressable>*/}
                 <TextInput
-                    style={[styles.input, bgInput]}
+                    style={styles.input}
                     onChangeText={props.onChange}
                     value={props.value}
                     placeholder={props.label}
-                    
                 />
-            </Pressable>
-
-            <Text style={styles.inputBorder}></Text>
+            
         </Animated.View>
 
     )
@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
         padding: 10,
         outLineStyle: 'none',
         marginBottom: 10,
+        color: 'white',
+        borderWidth: 1,
+        borderColor: 'transparent',
+        borderBottomColor: 'gray',
+        
     },
     label: {
         color: "#fff",

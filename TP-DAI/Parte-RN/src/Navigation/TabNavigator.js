@@ -4,17 +4,22 @@ import Home from '../Screens/Home'
 import PerfilStack from './PerfilStack'
 import { UserContext } from '../Context/UserContext'
 import { useEffect, useState, useContext } from "react";
+import LogOut from '../Screens/LogOut'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Tienda from "../Screens/Tienda";
 const Tab = createBottomTabNavigator()
 
 const homeName = "Home";
 const perfilName = "Perfil"
 const logOut = "Log Out"
+const shopName = "Tienda"
 export default function TabNavigator({ route }) {
     const ObjetoUser = useContext(UserContext)
 
     useEffect( () => {
         const crearContext = async () => {
-            await AsyncStorage.setItem("ObjetoUser", ObjetoUser)
+            console.log(ObjetoUser)
+            await AsyncStorage.setItem("Uid", ObjetoUser.user.uid)
         }
         crearContext()
     }, [])
@@ -33,6 +38,8 @@ export default function TabNavigator({ route }) {
                         iconName = focused ? 'person-circle' : 'person-circle-outline'
                     } else if (rn === logOut) {
                         iconName = focused ? 'log-out' : 'log-out-outline'
+                    } else if (rn = shopName) {
+                        iconName = focused ? 'log-out' : 'log-out-outline'
                     }
                     // You can return any component that you like here!
                     return <Ionicons name={iconName} size={size} color={color} />;
@@ -50,6 +57,7 @@ export default function TabNavigator({ route }) {
             }}>
             <Tab.Screen name={homeName} component={Home} />
             <Tab.Screen name={perfilName} component={PerfilStack} />
+            <Tab.Screen name={shopName} component={Tienda} />
             <Tab.Screen name={logOut} component={LogOut} />
             {/*<Tab.Screen name={logOut} component={LogOut}></Tab.Screen>*/}
         </Tab.Navigator>

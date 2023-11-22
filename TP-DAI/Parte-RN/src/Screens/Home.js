@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState} from 'react'
 import {View, StyleSheet ,Text, Button, Pressable} from 'react-native'
 import { UserContext } from '../Context/UserContext'
+import { doc, getDoc, getFirestore, collection } from "firebase/firestore";
 export default function Home({route, navigation}) {
-    const [usuario, setUsuario] = useState('')
 
     const ObjetoUser  = useContext(UserContext)
 
@@ -12,9 +12,9 @@ export default function Home({route, navigation}) {
         const cargarEntradas = async () => {
             try {
                 const db = getFirestore();
-                const docRef = doc(collection(db, 'users'), ObjetoUser,user.uid);
+                const docRef = doc(collection(db, 'entradas'), ObjetoUser.user.uid);
                 const docSnap = await getDoc(docRef);
-                console.log(docSnap)
+                console.log(docSnap.data())
             }
             catch(error) {
                 console.log(error);

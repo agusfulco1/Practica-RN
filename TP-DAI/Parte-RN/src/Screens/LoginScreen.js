@@ -10,6 +10,8 @@ import Button from "../Components/Button"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { UserContext } from '../Context/UserContext'
 import { doc, getDoc, getFirestore, collection } from "firebase/firestore";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 Pressable.defaultProps = { activeOpacity: 0.8 };
 
 export default function LoginScreen(props) {
@@ -21,6 +23,26 @@ export default function LoginScreen(props) {
         Fredoka_300Light,
     });
     const objetoUser = useContext(UserContext)
+
+    useEffect( () => {
+        const verificarLogin = async () => {
+        //ls = local storage
+          const lsUserUid = await AsyncStorage.getItem('Uid')
+          console.log(lsUserUid)
+          if (lsUserUid !== "") {
+            const db = getFirestore();
+            const docRef = doc(collection(db, 'users'), lsUserUid);
+            const docSnap = await getDoc(docRef);
+            objetoUser.setUser(docSnap.data().objUsuario)
+            setLoading(false)
+            props.navigation.navigate('Tab')
+            
+          } else {
+            setLoading(false)
+          } 
+        }
+        verificarLogin()
+      }, [])
     const onPressSign = () => {
         props.navigation.navigate('Sign Up')
     }
@@ -47,7 +69,7 @@ export default function LoginScreen(props) {
     }
     return (
         <View style={styles.container}>
-            {!fontsLoaded ? null : (
+            {isLoading ? <Text>Verificando datos</Text> : (
                 <View>
                     <Input label="Email" value={email} onChange={setEmail}></Input>
                     <Input label="Contraseña" value={password} onChange={setPassword}></Input>
@@ -67,7 +89,7 @@ export default function LoginScreen(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: 'rgba(34,36,40,1)',
         alignItems: 'center',
         justifyContent: 'center',
     },
