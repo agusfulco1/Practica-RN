@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState} from 'react'
 import {View, StyleSheet ,Text, Button, Pressable} from 'react-native'
-import axios from 'axios'
 import { UserContext } from '../Context/UserContext'
 export default function Home({route, navigation}) {
     const [usuario, setUsuario] = useState('')
@@ -9,14 +8,25 @@ export default function Home({route, navigation}) {
 
     console.log(ObjetoUser)
     
-    const onPress = () => {
-
-        navigation.navigate('PerfilVisualizar')
-    }
+    useEffect(() => {
+        const cargarEntradas = async () => {
+            try {
+                const db = getFirestore();
+                const docRef = doc(collection(db, 'users'), ObjetoUser,user.uid);
+                const docSnap = await getDoc(docRef);
+                console.log(docSnap)
+            }
+            catch(error) {
+                console.log(error);
+            }
+            
+        }
+        cargarEntradas()
+    }, [])
     
     return (
         <View>
-            {ObjetoUser.user.nombre === null ? <Text>Bienvenido <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text> : <Text>Bienvenido {ObjetoUser.user.Nombre} <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text>}
+            {ObjetoUser.user.nombre === null ? <Text>Bienvenido <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text> : <Text>Bienvenido {ObjetoUser.user.Nombre} <Pressable style={styles.boton} ><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text>}
         </View>
     )
 }

@@ -4,7 +4,8 @@ import { initializeApp } from "firebase/app";
 import "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
+import { useState } from 'react';
+import { UserContext } from './src/Context/UserContext'
 const firebaseConfig = {
   apiKey: "AIzaSyArdTNAB2okxowH24e0oD5466X7yb9A4cw",
   authDomain: "practica-rn.firebaseapp.com",
@@ -19,9 +20,13 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 export default function App() {
+  const [user, setUser] = useState()
   return (
-    <NavigationContainer>
-      <StackScreen />
-    </NavigationContainer>
+    <UserContext.Provider value={{ user, setUser }}>
+      <NavigationContainer>
+        <StackScreen />
+      </NavigationContainer>
+    </UserContext.Provider>
+
   )
 }
