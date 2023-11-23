@@ -2,6 +2,7 @@ import { useContext, useEffect, useState} from 'react'
 import {View, StyleSheet ,Text, Button, Pressable} from 'react-native'
 import { UserContext } from '../Context/UserContext'
 import { doc, getDoc, getFirestore, collection, getDocs } from "firebase/firestore";
+import CardEntrada from '../Components/CardEntrada';
 export default function Home({route, navigation}) {
     const [entradas, setEntradas] = useState([])
     const ObjetoUser  = useContext(UserContext)

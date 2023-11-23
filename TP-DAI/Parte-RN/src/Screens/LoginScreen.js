@@ -29,11 +29,11 @@ export default function LoginScreen(props) {
         //ls = local storage
           const lsUserUid = await AsyncStorage.getItem('Uid')
           console.log(lsUserUid)
-          if (lsUserUid !== "") {
+          if (lsUserUid !== null) {
             const db = getFirestore();
             const docRef = doc(collection(db, 'users'), lsUserUid);
             const docSnap = await getDoc(docRef);
-            objetoUser.setUser(docSnap.data().objUsuario)
+            objetoUser.setUser(docSnap.data())
             setLoading(false)
             props.navigation.navigate('Tab')
             
@@ -58,7 +58,7 @@ export default function LoginScreen(props) {
             const docRef = doc(collection(db, 'users'), user.uid);
             const docSnap = await getDoc(docRef);
             if (user.email !== undefined) {
-                objetoUser.setUser(docSnap.data().objUsuario)
+                objetoUser.setUser(docSnap.data())
                 props.navigation.navigate('Tab')
             }
         }
