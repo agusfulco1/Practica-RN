@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState} from 'react'
 import {View, StyleSheet ,Text, Button, Pressable} from 'react-native'
 import { UserContext } from '../Context/UserContext'
-import { doc, getDoc, getFirestore, collection } from "firebase/firestore";
+import { doc, getDoc, getFirestore, collection, getDocs } from "firebase/firestore";
 export default function Home({route, navigation}) {
-
+    const [entradas, setEntradas] = useState([])
     const ObjetoUser  = useContext(UserContext)
 
     console.log(ObjetoUser)
@@ -12,9 +12,13 @@ export default function Home({route, navigation}) {
         const cargarEntradas = async () => {
             try {
                 const db = getFirestore();
-                const docRef = doc(collection(db, 'entradas'), ObjetoUser.user.uid);
-                const docSnap = await getDoc(docRef);
-                console.log(docSnap.data())
+                const docRef = collection(db, 'entradas');
+                const docSnap = await getDocs(docRef);
+                let arrayEntradas = []
+                docSnap.forEach(doc => {
+                    arrayEntradas.push(doc.data())
+                })
+                setEntradas(arrayEntradas)
             }
             catch(error) {
                 console.log(error);
@@ -27,6 +31,11 @@ export default function Home({route, navigation}) {
     return (
         <View>
             {ObjetoUser.user.nombre === null ? <Text>Bienvenido <Pressable style={styles.boton} onPress={onPress}><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text> : <Text>Bienvenido {ObjetoUser.user.Nombre} <Pressable style={styles.boton} ><Text style={styles.textoBoton}>Completar mi perfil</Text></Pressable></Text>}
+            {entradas.map((entrada) => {
+                return (
+                    <CardEntrada entrada={entrada}></CardEntrada>
+                )
+            })}
         </View>
     )
 }
