@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Input from '../Components/Input';
 import Button from "../Components/Button"
-import {useState, useContext, useEffect} from 'react'
+import { useState, useContext, useEffect } from 'react'
 import {
     useFonts,
     Fredoka_300Light,
@@ -9,52 +9,57 @@ import {
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext';
 import { doc, setDoc, getFirestore } from "firebase/firestore";
-export default function PerfilEditar({navigation}) {
+export default function PerfilEditar({ navigation }) {
     const [Usuario, setUsuario] = useState('')
     const [Contraseña, setContraseña] = useState('')
     const [Email, setEmail] = useState('')
     const [respuesta, setRespuesta] = useState()
     const [isLoading, setLoading] = useState(true)
     const [Nombre, setNombre] = useState("")
-    const[Apellido, setApellido] = useState("")
-    
+    const [Apellido, setApellido] = useState("")
+
     const ObjetoUsuario = useContext(UserContext)
 
     useEffect(() => {
-        setUsuario(ObjetoUsuario.user.Usuario)
-        setContraseña(ObjetoUsuario.user.Contraseña)
-        setEmail(ObjetoUsuario.user.Email)
-        setNombre(ObjetoUsuario.user.Nombre)
-        setApellido(ObjetoUsuario.user.Apellido)
+        console.log(ObjetoUsuario)
+        setUsuario(ObjetoUsuario.user.usuario)
+        setContraseña(ObjetoUsuario.user.password)
+        setEmail(ObjetoUsuario.user.email)
+        setNombre(ObjetoUsuario.user.nombre)
+        setApellido(ObjetoUsuario.user.apellido)
     }, [])
-    
+
     let [fontsLoaded] = useFonts({
         Fredoka_300Light,
     });
 
     const onPress = async () => {
         const uid = ObjetoUsuario.user.uid
-        const objUsuario = {
-            Nombre: Nombre,
-            Contraseña: Contraseña,
-            Email: Email,
-            Usuario: Usuario,
-            Apellido: Apellido,
-            uid
-        }
         if (Email !== "" && Contraseña !== "") {
             const db = getFirestore();
-                await setDoc(doc(db, "users", uid), {
-                    objUsuario
-                });
-                console.log(objUsuario)
-                ObjetoUsuario.setUser(objUsuario)
-                navigation.navigate("PerfilVisualizar")
+            await setDoc(doc(db, "users", uid), {
+                nombre: Nombre,
+                password: Contraseña,
+                email: Email,
+                usuario: Usuario,
+                apellido: Apellido,
+                uid: uid
+            });
+            const objUsuario = {
+                nombre: Nombre,
+                password: Contraseña,
+                email: Email,
+                usuario: Usuario,
+                apellido: Apellido,
+                uid: uid
+            }
+            ObjetoUsuario.setUser(objUsuario)
+            navigation.navigate("PerfilVisualizar")
         }
         else {
             setLoading(false)
             setRespuesta("Cambios no guardados, los campos con asterisco son obligatorios")
-        } 
+        }
     }
 
     return (
@@ -73,7 +78,7 @@ export default function PerfilEditar({navigation}) {
                         </View>
                     </View>
                 </>
-            )} 
+            )}
         </View>
     )
 }
@@ -83,6 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'rgba(34,36,40,1)'
     },
     input: {
         height: 40,

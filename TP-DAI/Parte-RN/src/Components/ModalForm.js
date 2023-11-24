@@ -11,14 +11,13 @@ export default function ModalForm({ entrada, isModalVisible, handleModal }) {
         console.log(entrada)
         const db = getFirestore();
         const docRefUsuarios = doc(db, "users", objetoUser.user.uid)
-        //const docRefEntradas = doc(db, 'entradas', uid);
-        const hola = await updateDoc(docRefUsuarios, {
+        const docRefEntradas = doc(db, 'entradas', entrada.id);
+        await updateDoc(docRefUsuarios, {
             tarjeta: tarjeta
         })
-        console.log(hola)
-        /*await updateDoc(docRefEntradas, {
+        await updateDoc(docRefEntradas, {
             uidUser: objetoUser.user.uid
-        })*/
+        })
     }
     return (
         <Modal isVisible={isModalVisible}>
